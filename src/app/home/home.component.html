@@ -1,0 +1,118 @@
+<div
+  id="carouselExampleIndicators"
+  class="carousel slide"
+  data-bs-ride="carousel"
+>
+  <div class="carousel-indicators">
+    <button
+      type="button"
+      data-bs-target="#carouselExampleIndicators"
+      data-bs-slide-to="0"
+      class="active"
+      aria-current="true"
+      aria-label="Slide 1"
+    ></button>
+    <button
+      type="button"
+      data-bs-target="#carouselExampleIndicators"
+      data-bs-slide-to="1"
+      aria-label="Slide 2"
+    ></button>
+    <button
+      type="button"
+      data-bs-target="#carouselExampleIndicators"
+      data-bs-slide-to="2"
+      aria-label="Slide 3"
+    ></button>
+  </div>
+  <div class="carousel-inner" style="overflow-x: scroll;">
+    <div class="carousel-item {{active1}}">
+      <div class="container contain">
+        <h1>Example headline</h1>
+        <p>
+          A paragraph is a series of related sentences developing a central
+          idea, called the topic. Try to think about paragraphs in terms of
+          thematic unity: a paragraph is a sentence or a group of sentences that
+          supports one central, unified idea. Paragraphs add one idea at a time
+          to your broader argument.
+        </p>
+        <div class="btn btn-primary">Sign up today</div>
+      </div>
+    </div>
+    <div class="carousel-item {{ active2 }}">
+      <div class="container contain">
+        <h1>Example headline</h1>
+        <p>
+          A paragraph is a series of related sentences developing a central
+          idea, called the topic. Try to think about paragraphs in terms of
+          thematic unity: a paragraph is a sentence or a group of sentences that
+          supports one central, unified idea. Paragraphs add one idea at a time
+          to your broader argument.
+        </p>
+        <!-- <div class="btn btn-primary">Sign up today</div> -->
+      </div>
+    </div>
+    <div class="carousel-item">
+      <div class="container contain">
+        <h1>Example headline</h1>
+        <p>
+          A paragraph is a series of related sentences developing a central
+          idea, called the topic. Try to think about paragraphs in terms of
+          thematic unity: a paragraph is a sentence or a group of sentences that
+          supports one central, unified idea. Paragraphs add one idea at a time
+          to your broader argument.
+        </p>
+        <div class="btn btn-primary">Sign up today</div>
+      </div>
+    </div>
+  </div>
+  <button
+    class="carousel-control-prev"
+    type="button"
+    data-bs-target="#carouselExampleIndicators"
+    data-bs-slide="prev"
+  >
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button
+    class="carousel-control-next"
+    type="button"
+    data-bs-target="#carouselExampleIndicators"
+    data-bs-slide="next"
+    (click)="onFC()"
+  >
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+<br />
+
+<div class="relative">
+  <div class="cards">
+    <div class="flexArea">
+      <div #mobileCards class="dbList">
+        <div  style="display: flex;">
+          <div class="card" style="min-width: 18rem; max-width: 18rem;" *ngFor="let product of products; index as i">
+            <img
+              src="{{product.productImageUrl}}"
+              alt=""
+              class="card-img-top"
+            />
+            <div class="card-body">
+              <h3>{{product.productName}}</h3>
+              <p>{{product.productDesc}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="moveLeftButton">
+    <button class="btn btn-light" (click)="onLeftScrollClick()"><i class="bi bi-caret-left-fill"></i></button>
+  </div>
+  <div class="moveRightButton">
+    <button class="btn btn-light" (click)="onRightScrollClick()"><i class="bi bi-caret-right-fill"></i></button>
+  </div>
+</div>

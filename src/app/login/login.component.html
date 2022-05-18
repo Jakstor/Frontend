@@ -1,0 +1,50 @@
+<div class="topbar">
+  <div class="container">
+    <div class="row" [@openClose]="stateCheck">
+      <span class="alert alert-danger" role="alert" *ngIf="showError">
+        {{errorMessage}}
+      </span>
+    </div>
+    <div class="row" [@openClose]="stateCheck">
+      <span class="alert alert-danger" role="alert" *ngIf="showInvalidError">
+        Your email/mobile number is not registered. Please register yourself before login.&nbsp;
+        <button class="btn btn-danger" (click)="onRegister()">Register</button>
+      </span>
+    </div>
+  </div>
+</div>
+
+<div class="mar" [@list1]>
+  <div class="card shadow" style="width: 50rem">
+    <div class="card-header text-center shadow-sm">
+      <h3>Login</h3>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="emailOrMobile">Email/Mobile Number</label>
+          <input
+              type="text"
+              id="emailOrMobile"
+              class="form-control"
+              formControlName="emailOrMobile"
+            />
+          <span *ngIf="!loginForm.get('emailOrMobile').valid && loginForm.get('emailOrMobile').touched" style="color: red;">This field is required</span>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+           type="password"
+           id="password"
+           class="form-control"
+           formControlName="password"/>
+           <span *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched" style="color: red;">This field is required</span>
+        </div>
+        <br>
+        <div>
+          <button class="btn btn-primary" type="submit" [disabled]="!loginForm.valid">Login</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+.card {
+  margin: 0 auto;
+  float: none;
+  margin-bottom: 10px;
+}
+
+input.ng-invalid.ng-touched,textarea.ng-invalid.ng-touched{
+  border: 1px solid red;
+}
+
+.mar{
+  padding-top: 40px;
+}
+
+.topbar{
+  display:block;
+  width:100%;
+  height:70px;
+  }

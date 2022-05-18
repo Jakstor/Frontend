@@ -1,0 +1,174 @@
+<div class="topbar">
+  <div class="container">
+    <div class="row" [@openClose]="stateCheck">
+      <span class="alert alert-success" role="alert" *ngIf="showRegId">
+        You have registered successfully! Now you can login through email or phone
+        number. &nbsp;
+        <button class="btn btn-success" (click)="onLogin()">Login</button>&nbsp; Or you may login
+        later by clicking on [Login/Register].
+      </span>
+    </div>
+    <div class="row" [@openClose]="stateCheck">
+      <span class="alert alert-danger" role="alert" *ngIf="showError">
+        {{ errorMessage }}
+      </span>
+    </div>
+    <div class="row" [@openClose]="stateCheck">
+      <span class="alert alert-success" role="alert" *ngIf="otpAlert">
+        An OTP has been sent to your mobile number.
+      </span>
+    </div>
+    <div class="row" [@openClose]="stateCheck">
+      <span class="alert alert-danger" role="alert" *ngIf="otpError">
+        {{otpErrorMessage}}
+      </span>
+    </div>
+  </div>
+</div>
+
+<div class="mar" [@list1]>
+  <div class="card shadow" style="width: 50rem">
+    <div class="card-header text-center shadow-sm">
+      <h3>Registration</h3>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="regForm">
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input
+            type="text"
+            id="firstName"
+            class="form-control"
+            formControlName="firstName"
+          />
+          <span
+            *ngIf="
+              !regForm.get('firstName').valid &&
+              regForm.get('firstName').touched
+            "
+            style="color: red"
+            >This field is required</span
+          >
+        </div>
+        <div class="form-group">
+          <label for="middleName">Middle Name (If any)</label>
+          <input
+            type="text"
+            id="middleName"
+            class="form-control"
+            formControlName="middleName"
+          />
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input
+            type="text"
+            id="lastName"
+            class="form-control"
+            formControlName="lastName"
+          />
+          <span
+            *ngIf="
+              !regForm.get('lastName').valid && regForm.get('lastName').touched
+            "
+            style="color: red"
+            >This field is required</span
+          >
+        </div>
+        <div class="form-group">
+          <label for="email">Email-Id</label>
+          <input
+            type="email"
+            id="email"
+            class="form-control"
+            formControlName="email"
+          />
+          <span
+            *ngIf="!regForm.get('email').valid && regForm.get('email').touched"
+            style="color: red"
+            >This field is required</span
+          >
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input
+            type="tel"
+            id="phone"
+            class="form-control"
+            formControlName="phone"
+          />
+          <span
+            *ngIf="!regForm.get('phone').valid && regForm.get('phone').touched"
+            style="color: red"
+            >This field is required & must be of 10 digits. &nbsp;</span
+          >
+          <span
+            *ngIf="regForm.get('phone').errors?.['notPhn']"
+            style="color: red"
+            >It should be a phone number.</span
+          >
+        </div>
+        <div class="form-group">
+          <label for="newPassword">New Password</label>
+          <input
+            type="password"
+            id="newPassword"
+            class="form-control"
+            formControlName="newPassword"
+          />
+          <span
+            *ngIf="
+              !regForm.get('newPassword').valid &&
+              regForm.get('newPassword').touched
+            "
+            style="color: red"
+            >Password should contain minimum of 8 characters</span
+          >
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            class="form-control"
+            formControlName="confirmPassword"
+          />
+          <span
+            *ngIf="regForm.errors?.['notSame'] && regForm.get('newPassword').touched && regForm.get('confirmPassword').dirty"
+            style="color: red"
+          >
+            Passwords are not matching
+          </span>
+        </div>
+        <br *ngIf="enableProceed">
+        <div *ngIf="enableProceed">
+          <button class="btn btn-primary" type="button" [disabled]="!regForm.valid" (click)="onProceed()">Proceed</button>&nbsp;
+          <button class="btn btn-danger" type="button" *ngIf="showReset" (click)="onResetForm()">Reset</button>
+        </div>
+        <br *ngIf="otpBox">
+        <div class="form-group" style="width: 18rem;" *ngIf="otpBox">
+          <div class="input-group">
+            <input type="text" id="otp" class="form-control" placeholder="Please enter the OTP here" #otp>
+            <button class="btn btn-primary" type="button" (click)="onVerifyOTP(otp.value)">Submit</button>
+          </div>
+        </div>
+        <div *ngIf="showOtpMessage">
+          <small *ngIf="otpMessageValid" style="color: green;">&nbsp;Mobile number verified successfully</small>
+          <small *ngIf="otpMessageInValid" style="color: red;">&nbsp;Invalid OTP</small>
+        </div>
+        <br *ngIf="otpBox">
+        <div *ngIf="showRegisterButton">
+          <button
+            class="btn btn-primary"
+            type="button"
+            [disabled]="!enableRegister"
+            (click)="onRegister()"
+          >
+            Register
+          </button>
+        </div>
+      </form>
+      <br />
+    </div>
+  </div>
+</div>
